@@ -1,0 +1,9 @@
+#!/usr/bin/expect
+
+spawn /root/EasyRSA-3.0.8/easyrsa build-ca nopass
+
+expect "Common Name (eg: your user, host, or server name) \[Easy-RSA CA\]:"
+
+send "\r"
+
+expect eof

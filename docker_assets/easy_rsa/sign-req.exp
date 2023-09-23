@@ -1,0 +1,9 @@
+#!/usr/bin/expect
+
+spawn /root/EasyRSA-3.0.8/easyrsa sign-req server server
+
+expect "Confirm request details:"
+
+send "yes\r"
+
+expect eof
