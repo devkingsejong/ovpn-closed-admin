@@ -149,3 +149,4 @@ Temporary Items
 *.icloud
 
 # End of https://www.toptal.com/developers/gitignore/api/intellij+all,macos,java
+spring-boot-h2-db.mv.db
