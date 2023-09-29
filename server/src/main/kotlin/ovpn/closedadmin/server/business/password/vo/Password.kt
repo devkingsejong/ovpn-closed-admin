@@ -22,6 +22,8 @@ data class Password (var hashedPasswordWithEncryptedType:String) {
 
     }
 
+    constructor(passwordEncrypter: String, hashedPassword: String) : this("$passwordEncrypter$$hashedPassword")
+
     override fun toString(): String {
         return hashedPasswordWithEncryptedType
     }
