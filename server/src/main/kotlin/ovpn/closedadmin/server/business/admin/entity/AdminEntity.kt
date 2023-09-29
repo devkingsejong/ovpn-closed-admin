@@ -3,7 +3,7 @@ package ovpn.closedadmin.server.business.admin.entity
 import jakarta.persistence.*
 import ovpn.closedadmin.server.business.admin.enums.AdminStatus
 import ovpn.closedadmin.server.business.admin.vo.Admin
-import ovpn.closedadmin.server.business.password.vo.Password
+import ovpn.closedadmin.server.business.account.vo.Password
 import ovpn.closedadmin.server.common.entity.CreatedAtAndUpdatedAt
 import java.util.*
 

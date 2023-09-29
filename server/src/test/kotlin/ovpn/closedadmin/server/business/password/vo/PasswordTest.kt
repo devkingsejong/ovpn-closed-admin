@@ -4,7 +4,8 @@ import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
-import ovpn.closedadmin.server.business.password.exception.InvaliedPasswordVOException
+import ovpn.closedadmin.server.business.account.exception.InvaliedPasswordVOException
+import ovpn.closedadmin.server.business.account.vo.Password
 
 internal class PasswordTest {
     @Test

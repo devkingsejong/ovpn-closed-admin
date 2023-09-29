@@ -1,4 +1,4 @@
-package ovpn.closedadmin.server.business.password.problem
+package ovpn.closedadmin.server.business.account.problem
 
 import ovpn.closedadmin.server.common.problem.UnAuthorizedProblem
 

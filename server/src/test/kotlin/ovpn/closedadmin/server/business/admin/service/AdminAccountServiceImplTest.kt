@@ -8,9 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
 import ovpn.closedadmin.server.business.admin.entity.AdminEntity
 import ovpn.closedadmin.server.business.admin.repository.AdminRepository
-import ovpn.closedadmin.server.business.password.exception.InvaliedPasswordVOException
-import ovpn.closedadmin.server.business.password.problem.LoginFailedProblem
-import ovpn.closedadmin.server.business.password.vo.Password
+import ovpn.closedadmin.server.business.account.exception.InvaliedPasswordVOException
+import ovpn.closedadmin.server.business.account.problem.LoginFailedProblem
+import ovpn.closedadmin.server.business.account.vo.Password
 import java.util.*
 
 @SpringBootTest

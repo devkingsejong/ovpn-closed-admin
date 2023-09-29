@@ -1,4 +1,4 @@
-package ovpn.closedadmin.server.business.password.encrypter
+package ovpn.closedadmin.server.business.account.encrypter
 
 import org.springframework.stereotype.Component
 import ovpn.closedadmin.server.common.constant.CommonConstant

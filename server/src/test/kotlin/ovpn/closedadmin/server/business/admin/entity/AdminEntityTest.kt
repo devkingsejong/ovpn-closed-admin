@@ -9,7 +9,7 @@ import org.springframework.boot.test.context.SpringBootTest
 import ovpn.closedadmin.server.business.admin.enums.AdminStatus
 import ovpn.closedadmin.server.business.admin.repository.AdminRepository
 import ovpn.closedadmin.server.business.admin.vo.Admin
-import ovpn.closedadmin.server.business.password.vo.Password
+import ovpn.closedadmin.server.business.account.vo.Password
 import java.util.*
 
 @SpringBootTest

@@ -7,8 +7,9 @@ import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.NoSuchBeanDefinitionException
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
-import ovpn.closedadmin.server.business.password.exception.InvaliedPasswordVOException
-import ovpn.closedadmin.server.business.password.vo.Password
+import ovpn.closedadmin.server.business.account.exception.InvaliedPasswordVOException
+import ovpn.closedadmin.server.business.account.usecase.GetEncryptedPasswordString
+import ovpn.closedadmin.server.business.account.vo.Password
 
 @SpringBootTest
 internal class GetEncryptedPasswordStringTest {

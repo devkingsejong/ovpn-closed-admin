@@ -5,9 +5,9 @@ import org.springframework.stereotype.Service
 import ovpn.closedadmin.server.business.admin.entity.AdminEntity
 import ovpn.closedadmin.server.business.admin.repository.AdminRepository
 import ovpn.closedadmin.server.business.admin.vo.Admin
-import ovpn.closedadmin.server.business.password.problem.LoginFailedProblem
-import ovpn.closedadmin.server.business.password.usecase.GetEncryptedPasswordString
-import ovpn.closedadmin.server.business.password.vo.Password
+import ovpn.closedadmin.server.business.account.problem.LoginFailedProblem
+import ovpn.closedadmin.server.business.account.usecase.GetEncryptedPasswordString
+import ovpn.closedadmin.server.business.account.vo.Password
 
 @Service
 class AdminAccountServiceImpl @Autowired constructor(private var adminRepository: AdminRepository, private var getEncryptedPasswordString: GetEncryptedPasswordString): AdminAccountService {
