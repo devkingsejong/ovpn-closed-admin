@@ -29,10 +29,10 @@ class AdminEntity(
 
     @Enumerated(EnumType.STRING)
     @Column(name = "status", nullable = false)
-    var status: UserStatus = UserStatus.ACTIVE
+    var status: _AdminStatus = _AdminStatus.ACTIVE
 
-    enum class UserStatus {
-        ACTIVE, BLOCKED, WITHDRAWN
+    enum class _AdminStatus {
+        ACTIVE, BLOCKED, DELETED
     }
 
     @Column(name = "email", nullable = false, length = 150)
