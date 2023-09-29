@@ -6,8 +6,7 @@ enum class AdminStatus(val statusCode: String) {
     DELETED("DELETED");
 
     companion object {
-        fun getAdminStatusByStatusCode(statusCode: String?): AdminStatus? {
-            return values().find { it.statusCode == statusCode }
-        }
+        fun getAdminStatusByStatusCode(statusCode: String?): AdminStatus {
+            return values().find { it.statusCode == statusCode } ?: throw IllegalArgumentException("Invalid statusCode: $statusCode")        }
     }
 }

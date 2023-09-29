@@ -1,6 +1,9 @@
 package ovpn.closedadmin.server.business.admin.entity
 
 import jakarta.persistence.*
+import ovpn.closedadmin.server.business.admin.enums.AdminStatus
+import ovpn.closedadmin.server.business.admin.vo.Admin
+import ovpn.closedadmin.server.business.password.vo.Password
 import ovpn.closedadmin.server.common.entity.CreatedAtAndUpdatedAt
 import java.util.*
 
@@ -40,4 +43,18 @@ class AdminEntity(
 
     @Column(name = "password", nullable = false, length = 1500)
     var password: String = password
+
+    fun toVO(): Admin {
+        return Admin(
+            this.id!!,
+            this.uid,
+            this.nickname,
+            this.level,
+            AdminStatus.getAdminStatusByStatusCode(this.status.toString()),
+            this.email,
+            Password(this.password),
+            this.createdAt,
+            this.updatedAt
+        )
+    }
 }
