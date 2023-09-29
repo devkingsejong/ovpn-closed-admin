@@ -5,7 +5,7 @@ import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.ExceptionHandler
 import org.springframework.web.bind.annotation.RestControllerAdvice
 import ovpn.closedadmin.server.common.dto.CommonResponse
-import ovpn.closedadmin.server.common.exception.Problem
+import ovpn.closedadmin.server.common.problem.Problem
 
 @RestControllerAdvice(basePackages = ["ovpn.closedadmin.server"])
 class CommonControllerAdvice {

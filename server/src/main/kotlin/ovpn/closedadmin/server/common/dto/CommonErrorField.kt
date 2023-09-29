@@ -1,6 +1,6 @@
 package ovpn.closedadmin.server.common.dto
 
-import ovpn.closedadmin.server.common.exception.Problem
+import ovpn.closedadmin.server.common.problem.Problem
 
 class CommonErrorField(
     val code: String,

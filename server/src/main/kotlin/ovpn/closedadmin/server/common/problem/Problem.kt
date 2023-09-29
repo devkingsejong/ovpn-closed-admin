@@ -1,4 +1,4 @@
-package ovpn.closedadmin.server.common.exception
+package ovpn.closedadmin.server.common.problem
 
 import org.springframework.http.HttpStatus
 
