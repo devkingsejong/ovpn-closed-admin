@@ -72,4 +72,6 @@ RUN chmod 755 /root/ovpn-sysctl/start.sh
 COPY docker_assets/sysctl/stop.sh /root/ovpn-sysctl/stop.sh
 RUN chmod 755 /root/ovpn-sysctl/stop.sh
 
-ENTRYPOINT ["/bin/bash", "/root/ovpn-sysctl/start.sh"]
+RUN apt update&&apt-get install openjdk-17-jdk -y
+
+#ENTRYPOINT ["/bin/bash", "/root/ovpn-sysctl/start.sh"]
