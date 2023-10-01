@@ -38,7 +38,7 @@ class AdminEntity(
         ACTIVE, BLOCKED, DELETED
     }
 
-    @Column(name = "email", nullable = false, length = 150)
+    @Column(name = "email", unique = true, nullable = false, length = 150)
     var email: String = email
 
     @Column(name = "password", nullable = false, length = 1500)
