@@ -19,9 +19,9 @@ class JpaRunner @Autowired constructor(private var adminRepository: AdminReposit
         val tempUUID = UUID.randomUUID()
         val tempUser = AdminEntity(
             tempUUID,
-            "test2",
+            "default Admin",
             5,
-            "a2asdf@a2.com",
+            "admin@admin",
             "SHA512\$"+Encrypt.toSHA512("test"+tempUUID.toString())
         );
         adminRepository.save(tempUser)
