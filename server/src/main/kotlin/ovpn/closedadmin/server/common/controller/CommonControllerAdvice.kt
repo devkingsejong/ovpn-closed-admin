@@ -2,6 +2,7 @@ package ovpn.closedadmin.server.common.controller
 
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
+import org.springframework.http.converter.HttpMessageNotReadableException
 import org.springframework.web.bind.annotation.ExceptionHandler
 import org.springframework.web.bind.annotation.RestControllerAdvice
 import ovpn.closedadmin.server.common.dto.CommonResponse
@@ -19,5 +20,14 @@ class CommonControllerAdvice {
     protected fun handleGlobalException(e: Exception?): ResponseEntity<Any> {
         val response: CommonResponse<*> = CommonResponse<Any?>(e)
         return ResponseEntity<Any>(response, HttpStatus.INTERNAL_SERVER_ERROR)
+    }
+
+    // for catch errors in  jackson, @RequestBody and etc.
+    @ExceptionHandler(value = [HttpMessageNotReadableException::class])
+    protected fun handleJacksonExcepton(e: Exception): ResponseEntity<Any> {
+        if(e.cause?.cause is Problem) {
+            return handleGlobalProblem(e.cause?.cause as Problem)
+        }
+        return handleGlobalException(e)
     }
 }
