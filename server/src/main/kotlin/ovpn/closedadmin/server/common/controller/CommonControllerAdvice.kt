@@ -17,7 +17,11 @@ class CommonControllerAdvice {
     }
 
     @ExceptionHandler(value = [Exception::class])
-    protected fun handleGlobalException(e: Exception?): ResponseEntity<Any> {
+    protected fun handleGlobalException(e: Exception): ResponseEntity<Any> {
+        if(e.cause?.cause is Problem) {
+            return handleGlobalProblem(e.cause?.cause as Problem)
+        }
+
         val response: CommonResponse<*> = CommonResponse<Any?>(e)
         return ResponseEntity<Any>(response, HttpStatus.INTERNAL_SERVER_ERROR)
     }
