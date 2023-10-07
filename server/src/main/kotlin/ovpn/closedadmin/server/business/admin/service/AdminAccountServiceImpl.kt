@@ -8,6 +8,8 @@ import ovpn.closedadmin.server.business.admin.vo.Admin
 import ovpn.closedadmin.server.business.account.problem.LoginFailedProblem
 import ovpn.closedadmin.server.business.account.usecase.GetEncryptedPasswordString
 import ovpn.closedadmin.server.business.account.vo.Password
+import ovpn.closedadmin.server.business.admin.problem.AdminNotFoundProblem
+import java.util.*
 
 @Service
 class AdminAccountServiceImpl @Autowired constructor(private var adminRepository: AdminRepository, private var getEncryptedPasswordString: GetEncryptedPasswordString): AdminAccountService {
@@ -30,5 +32,10 @@ class AdminAccountServiceImpl @Autowired constructor(private var adminRepository
             AdminEntity._AdminStatus.ACTIVE
         ) ?: throw LoginFailedProblem()
         return loginUser.toVO()
+    }
+
+    override fun getAdminByUid(uid: UUID): Admin {
+        var admin = adminRepository.getAdminEntityByUid(uid) ?: throw AdminNotFoundProblem()
+        return admin.toVO()
     }
 }

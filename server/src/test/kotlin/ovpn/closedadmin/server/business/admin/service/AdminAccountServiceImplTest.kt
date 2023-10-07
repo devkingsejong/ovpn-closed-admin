@@ -11,6 +11,8 @@ import ovpn.closedadmin.server.business.admin.repository.AdminRepository
 import ovpn.closedadmin.server.business.account.exception.InvaliedPasswordVOException
 import ovpn.closedadmin.server.business.account.problem.LoginFailedProblem
 import ovpn.closedadmin.server.business.account.vo.Password
+import ovpn.closedadmin.server.business.admin.problem.AdminNotFoundProblem
+import ovpn.closedadmin.server.common.util.Encrypt
 import java.util.*
 
 @SpringBootTest
@@ -53,5 +55,28 @@ internal class AdminAccountServiceImplTest{
         Assertions.assertThrows(LoginFailedProblem::class.java) {
             adminAccountService.getAdminByEmailAndPurePassword("wrongEmail@a2.com", "wrongPW")
         }
+    }
+
+    @Test
+    @DisplayName("Uid로 유저를 정상적으로 가져오는지 테스트")
+    fun testGetAdminByUidSuccessful() {
+        Assertions.assertThrows(AdminNotFoundProblem::class.java) {
+            adminAccountService.getAdminByUid(UUID.randomUUID())
+        }
+
+        val tempUUID = UUID.randomUUID()
+        val tempUser = AdminEntity(
+            tempUUID,
+            "testGetAdminByUidSuccessful Admin",
+            5,
+            "testGetAdminByUidSuccessful@admin",
+            "SHA512\$"+ Encrypt.toSHA512("test"+tempUUID.toString())
+        );
+        adminRepository.save(tempUser)
+
+        Assertions.assertEquals(
+            "testGetAdminByUidSuccessful@admin",
+            adminAccountService.getAdminByUid(tempUUID).email
+        )
     }
 }
