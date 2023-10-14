@@ -5,11 +5,6 @@ import App from './pages/App';
 import reportWebVitals from './reportWebVitals';
 import {createBrowserRouter, RouterProvider} from "react-router-dom";
 
-interface RouteObject {
-    path: string;
-    element: React.ReactElement;
-}
-
 const router = createBrowserRouter([
     {
         path: "/",
