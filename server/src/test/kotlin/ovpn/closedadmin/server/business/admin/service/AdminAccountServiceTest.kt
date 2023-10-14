@@ -1,22 +1,19 @@
 package ovpn.closedadmin.server.business.admin.service
 
 import org.junit.jupiter.api.Assertions
-import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
 import ovpn.closedadmin.server.business.admin.entity.AdminEntity
 import ovpn.closedadmin.server.business.admin.repository.AdminRepository
-import ovpn.closedadmin.server.business.account.exception.InvaliedPasswordVOException
 import ovpn.closedadmin.server.business.account.problem.LoginFailedProblem
-import ovpn.closedadmin.server.business.account.vo.Password
 import ovpn.closedadmin.server.business.admin.problem.AdminNotFoundProblem
 import ovpn.closedadmin.server.common.util.Encrypt
 import java.util.*
 
 @SpringBootTest
-internal class AdminAccountServiceImplTest{
+internal class AdminAccountServiceTest{
 
     @Autowired
     lateinit var adminRepository: AdminRepository
