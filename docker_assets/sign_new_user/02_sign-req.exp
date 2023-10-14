@@ -1,0 +1,11 @@
+#!/usr/bin/expect
+
+set userName [lindex $argv 0]
+
+spawn /root/EasyRSA-3.0.8/easyrsa sign-req client $userName
+
+expect " Confirm request details:"
+
+send "yes\r"
+
+expect eof

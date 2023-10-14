@@ -74,4 +74,10 @@ RUN chmod 755 /root/ovpn-sysctl/stop.sh
 
 RUN apt update&&apt-get install openjdk-17-jdk -y
 
+
+COPY docker_assets/sign_new_user/01_gen-req.exp /root/EasyRSA-3.0.8/01_gen-req.exp
+COPY docker_assets/sign_new_user/02_sign-req.exp /root/EasyRSA-3.0.8/02_sign-req.exp
+COPY docker_assets/sign_new_user/sign_new_user.sh /root/EasyRSA-3.0.8/sign_new_user.sh
+RUN chmod 755 /root/EasyRSA-3.0.8/sign_new_user.sh
+
 #ENTRYPOINT ["/bin/bash", "/root/ovpn-sysctl/start.sh"]
