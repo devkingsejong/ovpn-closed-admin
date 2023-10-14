@@ -8,4 +8,5 @@ interface VpnUserRepository: JpaRepository<VpnUserEntity, Long> {
     fun getVpnUserRepositoryByUid(uid: UUID): VpnUserEntity?
     fun getVpnUserRepositoryByEmail(email: String): VpnUserEntity?
     fun getVpnUserEntityByEmailAndPasswordAndStatus(email: String, password: String, status: VpnUserEntity._VpnUserStatus): VpnUserEntity?
+    fun countVpnUserEntitiesByEmail(email: String): Int
 }
