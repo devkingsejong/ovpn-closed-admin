@@ -86,4 +86,30 @@ class VpnUserServiceTest {
             vpnUserService.getVpnUserByUid(tempUUID).uid
         )
     }
+
+    @Test
+    @DisplayName("성공적으로 유저리스트를 가져오는지 테스트")
+    fun testGetVpnUserListSuccessful() {
+        var tempUser = createNewVpnUser.createNewVpnUser(
+            "testNickname1",
+            "email1@VpnUserServiceImplTest",
+            "12345"
+        )
+
+        var tempUser2 = createNewVpnUser.createNewVpnUser(
+            "testNickname2",
+            "email2@VpnUserServiceImplTest",
+            "12345"
+        )
+
+        var tempUse3r = createNewVpnUser.createNewVpnUser(
+            "testNickname3",
+            "email3@VpnUserServiceImplTest",
+            "12345"
+        )
+
+        Assertions.assertTrue(
+            vpnUserService.getVpnUserList(0).size >=3
+        )
+    }
 }

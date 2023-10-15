@@ -1,6 +1,7 @@
 package ovpn.closedadmin.server.business.account.service
 
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.data.domain.PageRequest
 import org.springframework.stereotype.Service
 import ovpn.closedadmin.server.business.account.entity.VpnUserEntity
 import ovpn.closedadmin.server.business.account.problem.LoginFailedProblem
@@ -42,5 +43,13 @@ class VpnUserServiceImpl @Autowired constructor(private var vpnUserRepository: V
     override fun getVpnUserByUid(uid: UUID): VpnUser {
         var vpnUser = vpnUserRepository.getVpnUserRepositoryByUid(uid) ?: throw VpnUserNotFoundProblem()
         return vpnUser.toVO()
+    }
+
+    override fun getVpnUserList(page: Int): List<VpnUser> {
+        var vpnUserEntityList = vpnUserRepository.getVpnUserEntitiesByStatus(
+            VpnUserEntity._VpnUserStatus.ACTIVE,
+            PageRequest.of(0, 500000)
+        )
+        return vpnUserEntityList.content.map { it.toVO() }
     }
 }

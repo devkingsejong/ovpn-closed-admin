@@ -7,4 +7,5 @@ interface VpnUserService {
     fun getVpnUserByEmailAndPurePassword(email: String, purePassword: String): VpnUser
     fun getVpnUserByEmail(email: String): VpnUser
     fun getVpnUserByUid(uid: UUID): VpnUser
+    fun getVpnUserList(page: Int): List<VpnUser>
 }
