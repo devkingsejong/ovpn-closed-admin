@@ -3,7 +3,7 @@ import {Menu} from "antd";
 import {Page1} from "./Page1";
 import {AdminController} from "../business/admin/controller/AdminController";
 import {useEffect} from "react";
-import {Page2} from "./Page2";
+import {ManageVpnUser} from "./vpnuser/ManageVpnUser";
 
 const adminController = new AdminController();
 
@@ -11,25 +11,19 @@ export const PagesApp: React.FC = () => {
     const navigate = useNavigate();
     const location = useLocation();
 
-    // ... (다른 코드 부분들)
-
-    // 현재 경로를 기반으로 메뉴 키를 결정합니다.
     const determineMenuKey =  location.pathname;
 
     useEffect(() => {
         const checkTokenAndRedirectIfError = async () => {
             try {
-                // Try to check the token using the adminController.
                 await adminController.checkToken();
             } catch (error) {
-                // If an error occurs (e.g., the token is invalid), redirect to /login.
                 navigate('/login');
             }
         };
 
-        // Invoke the async function
         checkTokenAndRedirectIfError();
-    }, [navigate]); // Empty dependency array means this useEffect runs once when component mounts.
+    }, [navigate]);
 
     return (
         <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
@@ -39,7 +33,7 @@ export const PagesApp: React.FC = () => {
                     <Menu.Item key="/pages" onClick={() => navigate('')}>
                         Main
                     </Menu.Item>
-                    <Menu.Item key="/pages/page2" onClick={() => navigate('page2')}>
+                    <Menu.Item key="/pages/manage-vpn-user" onClick={() => navigate('manage-vpn-user')}>
                         Manage Vpn User
                     </Menu.Item>
                     <Menu.Item key="/pages/page3" onClick={() => navigate('page3')}>
@@ -52,7 +46,7 @@ export const PagesApp: React.FC = () => {
                 <div style={{padding: 15}}>
                     <Routes>
                         <Route index path="" element={<Page1 />} />
-                        <Route path="page2" element={<Page2 />} />
+                        <Route path="manage-vpn-user" element={<ManageVpnUser />} />
                     </Routes>
                 </div>
             </div>
