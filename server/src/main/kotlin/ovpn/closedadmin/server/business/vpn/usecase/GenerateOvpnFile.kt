@@ -16,6 +16,7 @@ class GenerateOvpnFile{
         val process = Runtime.getRuntime().exec(cmd)
         val exitCode = process.waitFor()
         Runtime.getRuntime().exec(cmd)
+        // TODO: in this time, failed to create or get file throws java.nio.file.NoSuchFileException
         return String(Files.readAllBytes(Paths.get("$ovpnClientConfigPath/files/$userName.ovpn")));
     }
 
