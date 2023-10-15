@@ -3,8 +3,11 @@ import {useEffect, useState} from "react";
 import {VpnUserController} from "../../business/account/controller/VpnUserController";
 import {VpnUserDto} from "../../business/account/dto/VpnUserDto";
 import {UserAddModal} from "./modal/UserAddModal";
+import {VpnController} from "../../business/vpn/controller/VpnController";
+import {UUID} from "crypto";
 
 const vpnUserController = new VpnUserController();
+const vpnController = new VpnController();
 
 export const ManageVpnUser: React.FC = () => {
 
@@ -40,7 +43,7 @@ export const ManageVpnUser: React.FC = () => {
             key: 'action',
             render: (_: unknown, record: VpnUserDto) => (
                 <Space size="middle">
-                    <a>Download .ovpn</a>
+                    <a onClick={async () => downloadOvpn(record.uid)}>Download .ovpn</a>
                 </Space>
             ),
         },
@@ -56,6 +59,22 @@ export const ManageVpnUser: React.FC = () => {
     }, []);
 
     const [isModalVisible, setIsModalVisible] = useState(false);
+
+    const downloadOvpn = async (uid: UUID) => {
+        try {
+            let ovpnFile = await vpnController.getOvpnFile(uid)
+
+            const blob = new Blob([ovpnFile], { type: 'application/octet-stream' });
+            const link = document.createElement('a');
+            link.setAttribute('download', 'config.ovpn');
+            link.href = window.URL.createObjectURL(blob);
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        } catch (e) {
+            message.error('ovpn file download failed.')
+        }
+    }
 
     const showModal = () => {
         setIsModalVisible(true);
