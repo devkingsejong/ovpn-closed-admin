@@ -13,6 +13,8 @@ class GenerateOvpnFile{
 
     fun generateOvpnFile(userName: String): String {
         val cmd = arrayOf("/bin/bash", "$ovpnClientConfigPath/make_config.sh", userName)
+        val process = Runtime.getRuntime().exec(cmd)
+        val exitCode = process.waitFor()
         Runtime.getRuntime().exec(cmd)
         return String(Files.readAllBytes(Paths.get("$ovpnClientConfigPath/files/$userName.ovpn")));
     }

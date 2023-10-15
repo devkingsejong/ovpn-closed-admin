@@ -18,7 +18,8 @@ class SignNewUser {
     fun signNewUser(userName: String): Boolean {
 
         val cmd = arrayOf("/bin/sh", "$easyRsaPath/sign_new_user.sh", userName)
-        Runtime.getRuntime().exec(cmd)
+        val process = Runtime.getRuntime().exec(cmd)
+        val exitCode = process.waitFor()
         return checkKeyCreated(userName) && checkCrtCreated(userName)
     }
 
