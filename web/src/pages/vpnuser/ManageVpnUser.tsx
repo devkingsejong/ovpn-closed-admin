@@ -46,7 +46,6 @@ export const ManageVpnUser: React.FC = () => {
         },
     ];
 
-
     useEffect(() => {
         const checkTokenAndRedirectIfError = async () => {
             let vpnUserList = await vpnUserController.list();
@@ -77,6 +76,9 @@ export const ManageVpnUser: React.FC = () => {
 
     return (
         <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
+            <h2>Manage Vpn Users</h2>
+            <h4 style={{color: "#ccc"}}>In this page, you can add vpn users.</h4>
+
             <Button type="primary" onClick={showModal} style={{ marginBottom: 16, float: "right" }}>
                 new vpn user
             </Button>
