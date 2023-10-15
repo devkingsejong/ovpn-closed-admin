@@ -1,9 +1,28 @@
 import {Route, Routes, useNavigate} from "react-router-dom";
 import {Menu} from "antd";
 import {Page1} from "./Page1";
+import {AdminController} from "../business/admin/controller/AdminController";
+import {useEffect} from "react";
+
+const adminController = new AdminController();
 
 export const PagesApp: React.FC = () => {
     const navigate = useNavigate();
+
+    useEffect(() => {
+        const checkTokenAndRedirectIfError = async () => {
+            try {
+                // Try to check the token using the adminController.
+                await adminController.checkToken();
+            } catch (error) {
+                // If an error occurs (e.g., the token is invalid), redirect to /login.
+                navigate('/login');
+            }
+        };
+
+        // Invoke the async function
+        checkTokenAndRedirectIfError();
+    }, [navigate]); // Empty dependency array means this useEffect runs once when component mounts.
 
     return (
         <div style={{ maxWidth: '1200px', margin: '0 auto' }}>

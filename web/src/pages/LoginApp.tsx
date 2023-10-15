@@ -1,20 +1,27 @@
-import React, { useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import {Button, Form, Input, message} from 'antd';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
 import {OvpnClosedAdminHttpUtil} from "../common/util/OvpnClosedAdminHttpUtil";
 import {AdminController} from "../business/admin/controller/AdminController";
+import {useNavigate} from "react-router-dom";
 
 const adminController = new AdminController();
 const LoginApp: React.FC = () => {
+    const navigate = useNavigate();
+
     const [email, setUsername] = useState<string>('');
     const [password, setPassword] = useState<string>('');
+
+    useEffect(() => {
+        sessionStorage.removeItem("authenticationToken")
+    }, []);
 
     const handleLogin = async () => {
         let loginResult = await adminController.login(email, password);
         if (!loginResult) {
             message.error('Login Failed. Please check your credentials.'); // Message displayed
         } else {
-            // TODO: Add redirect to Main page.
+            navigate('/pages');
         }
     };
 

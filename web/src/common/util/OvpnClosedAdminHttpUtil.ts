@@ -30,6 +30,6 @@ export class OvpnClosedAdminHttpUtil {
 
     private getAuthHeader(): any {
         const token = sessionStorage.getItem("authenticationToken");
-        return token ? {'Authorization': `${token}`} : {}
+        return token ? {'Authentication': `${token}`} : {}
     }
 }
