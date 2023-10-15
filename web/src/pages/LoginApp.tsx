@@ -1,13 +1,21 @@
 import React, { useState } from 'react';
-import { Button, Form, Input } from 'antd';
+import {Button, Form, Input, message} from 'antd';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
+import {OvpnClosedAdminHttpUtil} from "../common/util/OvpnClosedAdminHttpUtil";
+import {AdminController} from "../business/admin/controller/AdminController";
 
+const adminController = new AdminController();
 const LoginApp: React.FC = () => {
     const [email, setUsername] = useState<string>('');
     const [password, setPassword] = useState<string>('');
 
-    const handleLogin = () => {
-        console.log("Logging in with:", email, password);
+    const handleLogin = async () => {
+        let loginResult = await adminController.login(email, password);
+        if (!loginResult) {
+            message.error('Login Failed. Please check your credentials.'); // Message displayed
+        } else {
+            // TODO: Add redirect to Main page.
+        }
     };
 
     return (
