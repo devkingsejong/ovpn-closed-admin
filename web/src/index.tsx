@@ -5,6 +5,7 @@ import App from './pages/App';
 import reportWebVitals from './reportWebVitals';
 import {createBrowserRouter, RouterProvider} from "react-router-dom";
 import LoginApp from "./pages/LoginApp";
+import {PagesApp} from "./pages/PagesApp";
 
 const router = createBrowserRouter([
     {
@@ -19,6 +20,10 @@ const router = createBrowserRouter([
         path: "/login",
         element: <LoginApp />
     },
+    {
+        path: "/pages/*",
+        element: <PagesApp />
+    }
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
