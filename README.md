@@ -2,5 +2,8 @@
 
 
 
-https://github.com/devkingsejong/ovpn-closed-admin/assets/24914631/7411c638-ef61-4025-b788-7bf66380d618
+
+
+
+https://github.com/devkingsejong/ovpn-closed-admin/assets/24914631/d72115d3-8389-41d8-bb93-ff496cbcfde5
 
