@@ -6,7 +6,6 @@ import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
 import ovpn.closedadmin.server.common.problem.InvalidParameterProblem
 
-
 class VpnUserLoginFormTest {
     @Test
     @DisplayName("VpnUserLoginForm Dto 검증이 성공적인지 테스트")

@@ -16,23 +16,27 @@ import java.util.*
 class VpnUserServiceImpl @Autowired constructor(private var vpnUserRepository: VpnUserRepository, private var getEncryptedPasswordString: GetEncryptedPasswordString): VpnUserService {
 
     override fun getVpnUserByEmailAndPurePassword(email: String, purePassword: String): VpnUser {
-        var tempVpnUser = this.getVpnUserByEmail(email)
+         try {
+            var tempVpnUser = this.getVpnUserByEmail(email) // Throws VpnUserNotFoundProblem
 
-        var hashedPasswordVO = Password(
-            tempVpnUser.password.passwordEncrypter,
-            getEncryptedPasswordString.getEncryptedPassword(
+            var hashedPasswordVO = Password(
                 tempVpnUser.password.passwordEncrypter,
-                purePassword,
-                tempVpnUser.uid.toString()
+                getEncryptedPasswordString.getEncryptedPassword(
+                    tempVpnUser.password.passwordEncrypter,
+                    purePassword,
+                    tempVpnUser.uid.toString()
+                )
             )
-        )
 
-        var loginUser = vpnUserRepository.getVpnUserEntityByEmailAndPasswordAndStatus(
-            email,
-            hashedPasswordVO.hashedPasswordWithEncryptedType,
-            VpnUserEntity._VpnUserStatus.ACTIVE
-        ) ?: throw LoginFailedProblem()
-        return loginUser.toVO()
+            var loginUser = vpnUserRepository.getVpnUserEntityByEmailAndPasswordAndStatus(
+                email,
+                hashedPasswordVO.hashedPasswordWithEncryptedType,
+                VpnUserEntity._VpnUserStatus.ACTIVE
+            ) ?: throw LoginFailedProblem()
+            return loginUser.toVO()
+        } catch (problem: VpnUserNotFoundProblem) {
+            throw LoginFailedProblem()
+        }
     }
 
     override fun getVpnUserByEmail(email: String): VpnUser {
