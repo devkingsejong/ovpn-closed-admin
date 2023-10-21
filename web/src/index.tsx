@@ -1,11 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
-import App from './pages/App';
 import reportWebVitals from './reportWebVitals';
 import {createBrowserRouter, RouterProvider} from "react-router-dom";
-import LoginApp from "./pages/LoginApp";
-import {PagesApp} from "./pages/PagesApp";
+import {AdminRouteApp} from "./pages/admin/AdminRouteApp";
 
 const router = createBrowserRouter([
     {
@@ -13,16 +11,8 @@ const router = createBrowserRouter([
         element: <div>Hello world!</div>,
     },
     {
-        path: "/app",
-        element: <App/>
-    },
-    {
-        path: "/login",
-        element: <LoginApp />
-    },
-    {
-        path: "/pages/*",
-        element: <PagesApp />
+        path: "/admin/*",
+        element: <AdminRouteApp />
     }
 ]);
 

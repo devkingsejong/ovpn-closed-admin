@@ -1,9 +1,9 @@
 import {Route, Routes, useLocation, useNavigate} from "react-router-dom";
 import {Menu} from "antd";
-import {Page1} from "./Page1";
-import {AdminController} from "../business/admin/controller/AdminController";
+import {StatusPage} from "./subpages/status/StatusPage";
+import {AdminController} from "../../business/admin/controller/AdminController";
 import {useEffect} from "react";
-import {ManageVpnUser} from "./vpnuser/ManageVpnUser";
+import {ManageVpnUserPage} from "./subpages/vpnuser/ManageVpnUserPage";
 
 const adminController = new AdminController();
 
@@ -18,7 +18,7 @@ export const PagesApp: React.FC = () => {
             try {
                 await adminController.checkToken();
             } catch (error) {
-                navigate('/login');
+                navigate('/admin/login');
             }
         };
 
@@ -30,13 +30,13 @@ export const PagesApp: React.FC = () => {
             <div className="title-area">
                 <h1>OVPN-CLOSED-ADMIN</h1>
                 <Menu mode="horizontal" defaultSelectedKeys={[determineMenuKey]}>
-                    <Menu.Item key="/pages" onClick={() => navigate('')}>
+                    <Menu.Item key="/admin/pages" onClick={() => navigate('')}>
                         Main
                     </Menu.Item>
-                    <Menu.Item key="/pages/manage-vpn-user" onClick={() => navigate('manage-vpn-user')}>
+                    <Menu.Item key="/admin/pages/manage-vpn-user" onClick={() => navigate('manage-vpn-user')}>
                         Manage Vpn User
                     </Menu.Item>
-                    <Menu.Item key="/pages/page3" onClick={() => navigate('page3')}>
+                    <Menu.Item key="/admin/pages/page3" onClick={() => navigate('page3')}>
                         Manage Admin
                     </Menu.Item>
                 </Menu>
@@ -45,8 +45,8 @@ export const PagesApp: React.FC = () => {
             <div className="content-area">
                 <div style={{padding: 15}}>
                     <Routes>
-                        <Route index path="" element={<Page1 />} />
-                        <Route path="manage-vpn-user" element={<ManageVpnUser />} />
+                        <Route index path="" element={<StatusPage />} />
+                        <Route path="manage-vpn-user" element={<ManageVpnUserPage />} />
                     </Routes>
                 </div>
             </div>

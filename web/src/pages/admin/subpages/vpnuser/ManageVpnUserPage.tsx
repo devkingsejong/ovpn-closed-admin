@@ -1,15 +1,15 @@
 import {Button, message, Space, Table} from "antd";
 import {useEffect, useState} from "react";
-import {VpnUserController} from "../../business/account/controller/VpnUserController";
-import {VpnUserDto} from "../../business/account/dto/VpnUserDto";
+import {VpnUserController} from "../../../../business/account/controller/VpnUserController";
+import {VpnUserDto} from "../../../../business/account/dto/VpnUserDto";
 import {UserAddModal} from "./modal/UserAddModal";
-import {VpnController} from "../../business/vpn/controller/VpnController";
+import {VpnController} from "../../../../business/vpn/controller/VpnController";
 import {UUID} from "crypto";
 
 const vpnUserController = new VpnUserController();
 const vpnController = new VpnController();
 
-export const ManageVpnUser: React.FC = () => {
+export const ManageVpnUserPage: React.FC = () => {
 
     const [vpnUserList, setVpnUserList] = useState<Array<VpnUserDto>>([]);
     const columns = [

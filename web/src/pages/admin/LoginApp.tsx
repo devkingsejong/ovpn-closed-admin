@@ -1,8 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {Button, Form, Input, message} from 'antd';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
-import {OvpnClosedAdminHttpUtil} from "../common/util/OvpnClosedAdminHttpUtil";
-import {AdminController} from "../business/admin/controller/AdminController";
+import {AdminController} from "../../business/admin/controller/AdminController";
 import {useNavigate} from "react-router-dom";
 
 const adminController = new AdminController();
@@ -21,7 +20,7 @@ const LoginApp: React.FC = () => {
         if (!loginResult) {
             message.error('Login Failed. Please check your credentials.'); // Message displayed
         } else {
-            navigate('/pages');
+            navigate('/admin/pages');
         }
     };
 

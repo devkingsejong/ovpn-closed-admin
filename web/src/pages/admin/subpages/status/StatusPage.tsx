@@ -1,6 +1,5 @@
 import {Card, Col, Row} from "antd";
-import {AdminController} from "../business/admin/controller/AdminController";
-import {CommonController} from "../common/controller/CommonController";
+import {CommonController} from "../../../../common/controller/CommonController";
 import {useEffect, useState} from "react";
 
 const cardStyle = {
@@ -10,7 +9,7 @@ const cardStyle = {
 
 const commonController = new CommonController();
 
-export const Page1: React.FC = () => {
+export const StatusPage: React.FC = () => {
 
     const [cpuUsage, setCpuUsage] = useState<string>('');
     const [freeMemory, setFreeMemory] = useState<string>('');
