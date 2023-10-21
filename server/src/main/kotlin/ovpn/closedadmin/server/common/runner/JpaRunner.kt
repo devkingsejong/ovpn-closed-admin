@@ -6,6 +6,7 @@ import org.springframework.stereotype.Component
 import ovpn.closedadmin.server.business.account.usecase.CreateNewVpnUser
 import ovpn.closedadmin.server.business.admin.entity.AdminEntity
 import ovpn.closedadmin.server.business.admin.repository.AdminRepository
+import ovpn.closedadmin.server.common.constant.ReferenceValues
 import ovpn.closedadmin.server.common.util.Encrypt
 import java.util.*
 
@@ -27,6 +28,10 @@ class JpaRunner @Autowired constructor(private var adminRepository: AdminReposit
         );
         adminRepository.save(tempUser)
 
-        createNewVpnUser.createNewVpnUser("default vpn user", "vpnuser@vpnuser.com", "test")
+        createNewVpnUser.createNewVpnUser(
+            "default vpn user",
+            ReferenceValues.DEFAULT_VPN_USER_EMAIL,
+            ReferenceValues.DEFAULT_VPN_USER_PASSWORD
+        )
     }
 }
