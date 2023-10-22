@@ -4,6 +4,7 @@ import './index.css';
 import reportWebVitals from './reportWebVitals';
 import {createBrowserRouter, RouterProvider} from "react-router-dom";
 import {AdminRouteApp} from "./pages/admin/AdminRouteApp";
+import {MyVpnRouteApp} from "./pages/myvpn/MyVpnRouteApp";
 
 const router = createBrowserRouter([
     {
@@ -13,6 +14,10 @@ const router = createBrowserRouter([
     {
         path: "/admin/*",
         element: <AdminRouteApp />
+    },
+    {
+        path: "/myvpn/*",
+        element: <MyVpnRouteApp />
     }
 ]);
 

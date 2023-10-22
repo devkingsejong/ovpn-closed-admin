@@ -1,11 +1,11 @@
 import React, {useEffect, useState} from 'react';
 import {Button, Form, Input, message} from 'antd';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
-import {AdminController} from "../../business/admin/controller/AdminController";
 import {useNavigate} from "react-router-dom";
+import {MyVpnController} from "../../business/myvpn/controller/MyVpnController";
 
-const adminController = new AdminController();
-const MyVpnRouteApp: React.FC = () => {
+const myVpnController = new MyVpnController();
+const MyVpnLoginApp: React.FC = () => {
     const navigate = useNavigate();
 
     const [email, setUsername] = useState<string>('');
@@ -16,7 +16,7 @@ const MyVpnRouteApp: React.FC = () => {
     }, []);
 
     const handleLogin = async () => {
-        let loginResult = await adminController.login(email, password);
+        let loginResult = await myVpnController.login(email, password);
         if (!loginResult) {
             message.error('Login Failed. Please check your credentials.'); // Message displayed
         } else {
@@ -27,7 +27,7 @@ const MyVpnRouteApp: React.FC = () => {
     return (
         <div style={{ maxWidth: '300px', margin: '0 auto', paddingTop: '100px' }}>
             <h1 style={{ fontSize: '24px', textAlign: 'center', marginBottom: '40px' }}>
-                OVPN-CLOSED-ADMIN
+                MY VPN
             </h1>
             <Form>
                 <Form.Item>
@@ -57,4 +57,4 @@ const MyVpnRouteApp: React.FC = () => {
     );
 };
 
-export default MyVpnRouteApp;
+export default MyVpnLoginApp;
