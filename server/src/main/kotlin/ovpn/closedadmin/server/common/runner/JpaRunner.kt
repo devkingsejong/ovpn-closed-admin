@@ -3,7 +3,8 @@ package ovpn.closedadmin.server.common.runner
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.CommandLineRunner
 import org.springframework.stereotype.Component
-import ovpn.closedadmin.server.business.account.usecase.CreateNewVpnUser
+import ovpn.closedadmin.server.business.account.dto.CreateVpnUserForm
+import ovpn.closedadmin.server.business.account.usecase.CreateNewVpnUserWithCreateNewOvpnFile
 import ovpn.closedadmin.server.business.admin.entity.AdminEntity
 import ovpn.closedadmin.server.business.admin.repository.AdminRepository
 import ovpn.closedadmin.server.common.constant.ReferenceValues
@@ -11,7 +12,7 @@ import ovpn.closedadmin.server.common.util.Encrypt
 import java.util.*
 
 @Component
-class JpaRunner @Autowired constructor(private var adminRepository: AdminRepository, private var createNewVpnUser: CreateNewVpnUser) : CommandLineRunner {
+class JpaRunner @Autowired constructor(private var adminRepository: AdminRepository, private var createNewVpnUserWithCreateNewOvpnFile: CreateNewVpnUserWithCreateNewOvpnFile) : CommandLineRunner {
 
     @Throws(Exception::class)
     override fun run(vararg args: String) {
@@ -28,10 +29,13 @@ class JpaRunner @Autowired constructor(private var adminRepository: AdminReposit
         );
         adminRepository.save(tempUser)
 
-        createNewVpnUser.createNewVpnUser(
-            "default vpn user",
-            ReferenceValues.DEFAULT_VPN_USER_EMAIL,
-            ReferenceValues.DEFAULT_VPN_USER_PASSWORD
+        createNewVpnUserWithCreateNewOvpnFile.run(
+            CreateVpnUserForm(
+                "default vpn user",
+                ReferenceValues.DEFAULT_VPN_USER_EMAIL,
+                ReferenceValues.DEFAULT_VPN_USER_PASSWORD
+
+            )
         )
     }
 }
