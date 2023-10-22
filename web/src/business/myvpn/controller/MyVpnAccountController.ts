@@ -4,7 +4,7 @@ import {MyVpnHttpUtil} from "../../../common/util/MyVpnHttpUtil";
 
 const myVpnHttpUtil = new MyVpnHttpUtil();
 
-export class MyVpnController {
+export class MyVpnAccountController {
     async login(email: string, password: string): Promise<Boolean> {
         const payload: LoginPayload = {
             email,

@@ -2,9 +2,9 @@ import React, {useEffect, useState} from 'react';
 import {Button, Form, Input, message} from 'antd';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
 import {useNavigate} from "react-router-dom";
-import {MyVpnController} from "../../business/myvpn/controller/MyVpnController";
+import {MyVpnAccountController} from "../../business/myvpn/controller/MyVpnAccountController";
 
-const myVpnController = new MyVpnController();
+const myVpnController = new MyVpnAccountController();
 const MyVpnLoginApp: React.FC = () => {
     const navigate = useNavigate();
 
@@ -20,7 +20,7 @@ const MyVpnLoginApp: React.FC = () => {
         if (!loginResult) {
             message.error('Login Failed. Please check your credentials.'); // Message displayed
         } else {
-            navigate('/admin/pages');
+            navigate('/myvpn/main');
         }
     };
 
