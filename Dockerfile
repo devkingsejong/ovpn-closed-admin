@@ -1,3 +1,14 @@
+FROM azul/zulu-openjdk:17 as builder
+
+COPY server/ /server/
+
+# gradlew 실행 권한 부여
+RUN chmod +x -R /server/gradlew
+
+# JAR 파일 빌드
+WORKDIR /server
+RUN ./gradlew bootJar -x test
+
 FROM ubuntu:20.04
 
 RUN apt-get update;
@@ -72,12 +83,14 @@ RUN chmod 755 /root/ovpn-sysctl/start.sh
 COPY docker_assets/sysctl/stop.sh /root/ovpn-sysctl/stop.sh
 RUN chmod 755 /root/ovpn-sysctl/stop.sh
 
-RUN apt update&&apt-get install openjdk-17-jdk -y
-
+RUN apt-get install openjdk-17-jdk -y
 
 COPY docker_assets/sign_new_user/01_gen-req.exp /root/EasyRSA-3.0.8/01_gen-req.exp
 COPY docker_assets/sign_new_user/02_sign-req.exp /root/EasyRSA-3.0.8/02_sign-req.exp
 COPY docker_assets/sign_new_user/sign_new_user.sh /root/EasyRSA-3.0.8/sign_new_user.sh
 RUN chmod 755 /root/EasyRSA-3.0.8/sign_new_user.sh
 
-#ENTRYPOINT ["/bin/bash", "/root/ovpn-sysctl/start.sh"]
+RUN mkdir -p /root/server
+COPY --from=builder /server/build/libs/server-0.0.1-SNAPSHOT.jar /root/server/server.jar
+
+ENTRYPOINT ["/bin/bash", "/root/ovpn-sysctl/start.sh"]

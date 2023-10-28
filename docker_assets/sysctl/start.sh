@@ -16,6 +16,4 @@ IP=$(curl -s ifconfig.me/all.json | jq -r '.ip_addr') &&\
     --config /etc/openvpn/$INSTANCE_NAME.conf \
     --writepid /run/openvpn/$INSTANCE_NAME.pid
 
-while true; do
-    sleep 3600
-done
+java -jar /root/server/server.jar

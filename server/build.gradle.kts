@@ -11,6 +11,7 @@ plugins {
 group = "ovpn.closedadmin"
 version = "0.0.1-SNAPSHOT"
 
+
 java {
     sourceCompatibility = JavaVersion.VERSION_17
 }
@@ -42,6 +43,7 @@ dependencies {
 
     runtimeOnly("org.jetbrains.kotlin:kotlin-reflect:1.9.0")
 }
+
 
 tasks.withType<KotlinCompile> {
     kotlinOptions {
