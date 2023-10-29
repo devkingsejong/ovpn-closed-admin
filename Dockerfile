@@ -15,6 +15,7 @@ RUN apt-get update && \
     curl -sL https://deb.nodesource.com/setup_16.x | bash - && \
     apt-get install -y nodejs
 
+RUN npm install
 RUN npm run build
 
 
