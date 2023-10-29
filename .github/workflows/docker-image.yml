@@ -1,0 +1,32 @@
+name: Docker Image CI
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Code
+      uses: actions/checkout@v3
+      with:
+        ref: ${{ github.head_ref }}   # checkout the correct branch name
+        fetch-depth: 0                # fetch the whole repo history
+
+    - name: Git Version
+      id: version
+      uses: codacy/git-version@2.7.1
+        
+    - name: Build the Docker image
+      run: docker build . --file Dockerfile --tag ovpn-closed-admin:${{ steps.version.outputs.version }}
+
+    - name: Login to Docker Hub
+      run: docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
+      
+    - name: Push Docker image
+      run: docker push ovpn-closed-admin:${{ steps.version.outputs.version }}
