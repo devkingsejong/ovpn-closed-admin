@@ -2,24 +2,36 @@ FROM azul/zulu-openjdk:17 as builder
 
 COPY server/ /server/
 
-# gradlew 실행 권한 부여
 RUN chmod +x -R /server/gradlew
 
-# JAR 파일 빌드
 WORKDIR /server
 RUN ./gradlew bootJar -x test
 
+COPY web/ /web/
+WORKDIR /web
+
+RUN apt-get update && \
+    apt-get install -y curl && \
+    curl -sL https://deb.nodesource.com/setup_16.x | bash - && \
+    apt-get install -y nodejs
+
+RUN npm run build
+
+
 FROM ubuntu:20.04
 
-RUN apt-get update;
-RUN apt-get install openvpn -y
-RUN apt-get install openssh-server -y
-RUN apt-get install ssh -y
-RUN apt-get install expect -y
-RUN apt-get install curl -y
-RUN apt-get install jq -y
-RUN apt-get install iptables -y
-RUN apt-get install vim -y
+RUN apt-get update &&  \
+    apt-get install openvpn -y &&  \
+    apt-get install openssh-server -y && \
+    apt-get install ssh -y && \
+    apt-get install expect -y && \
+    apt-get install curl -y && \
+    apt-get install jq -y && \
+    apt-get install iptables -y && \
+    apt-get install vim -y
+
+RUN curl -sL https://deb.nodesource.com/setup_16.x | bash - && \
+        apt-get install -y nodejs
 
 RUN wget -P ~/ https://github.com/OpenVPN/easy-rsa/releases/download/v3.0.8/EasyRSA-3.0.8.tgz
 RUN tar xvf ~/EasyRSA-3.0.8.tgz -C ~/
@@ -60,12 +72,12 @@ RUN cp /etc/openvpn/ca.crt ~/client-configs/keys/
 
 COPY docker_assets/openvpn/server.conf /etc/openvpn
 
-RUN chmod 400 /etc/openvpn/server.key
-RUN chmod 400 /etc/openvpn/ca.crt
-RUN chmod 400 /etc/openvpn/server.crt
-RUN chmod 400 /etc/openvpn/dh.pem
-RUN chmod 400 /etc/openvpn/ta.key
-#
+RUN chmod 400 /etc/openvpn/server.key && \
+    chmod 400 /etc/openvpn/ca.crt && \
+    chmod 400 /etc/openvpn/server.crt && \
+    chmod 400 /etc/openvpn/dh.pem && \
+    chmod 400 /etc/openvpn/ta.key
+
 RUN mkdir -p /root/client-configs/files
 RUN cp /root/client-configs/keys/ta.key /root/client-configs/files/
 RUN chmod 400 /root/client-configs/files/ta.key
@@ -92,5 +104,10 @@ RUN chmod 755 /root/EasyRSA-3.0.8/sign_new_user.sh
 
 RUN mkdir -p /root/server
 COPY --from=builder /server/build/libs/server-0.0.1-SNAPSHOT.jar /root/server/server.jar
+
+RUN mkdir -p /root/web
+COPY --from=builder /web/build /root/web/build
+
+RUN npm install -g serve
 
 ENTRYPOINT ["/bin/bash", "/root/ovpn-sysctl/start.sh"]

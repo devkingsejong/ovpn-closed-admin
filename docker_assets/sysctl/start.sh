@@ -16,4 +16,6 @@ IP=$(curl -s ifconfig.me/all.json | jq -r '.ip_addr') &&\
     --config /etc/openvpn/$INSTANCE_NAME.conf \
     --writepid /run/openvpn/$INSTANCE_NAME.pid
 
-java -jar /root/server/server.jar
+
+serve -s ~/web/build -l 3000 &
+java -jar -Dexternal.ip=$IP /root/server/server.jar
