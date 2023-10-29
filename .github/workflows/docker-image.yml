@@ -23,7 +23,7 @@ jobs:
       uses: codacy/git-version@2.7.1
         
     - name: Build the Docker image
-      run: docker build . --no-cache --file Dockerfile --tag ovpn-closed-admin:${{ steps.version.outputs.version }}
+      run: docker build . --no-cache --file Dockerfile --tag devkingsejong/ovpn-closed-admin:${{ steps.version.outputs.version }}
 
     - name: Login to Docker Hub
       run: docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
