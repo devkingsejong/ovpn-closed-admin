@@ -5,9 +5,8 @@ export class OvpnClosedAdminHttpUtil {
     private readonly httpUtil: HttpUtil;
 
     constructor() {
-        this.httpUtil = new HttpUtil(
-            'http://localhost:8888'
-        );
+        const hostname = window.location.hostname;
+        this.httpUtil = new HttpUtil("http://"+hostname+":8888");
     }
 
     public async get<T>(endpoint: string): Promise<CommonResponse<T>> {
